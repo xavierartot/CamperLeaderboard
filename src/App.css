@@ -1,3 +1,15 @@
 .rounded-circle {
   max-width: 50px;
 }
+.pl-9 {
+  padding-left: 7em;
+}
+.th-all-time, .th-30 {
+  cursor: pointer;
+}
+.table td:not(.no-img){
+  padding-top: 25px;
+}
+table a  {
+ transition: all .4s 
+}
