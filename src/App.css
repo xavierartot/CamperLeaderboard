@@ -3,6 +3,7 @@
 }
 .pl-9 {
   padding-left: 7em;
+  text-align: center !important;
 }
 .th-all-time, .th-30 {
   cursor: pointer;

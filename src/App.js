@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Axios from 'axios';
+import 'react-fontawesome';
 
 class App extends Component {
   constructor() {
@@ -32,7 +33,6 @@ class App extends Component {
       });
   }
   handlePast30Days = (event) => {
-    //https://fcctop100.herokuapp.com/api/fccusers/top/recent
     Axios.get('https://fcctop100.herokuapp.com/api/fccusers/top/recent')
       .then( res => {
         return this.setState({ 
@@ -45,7 +45,6 @@ class App extends Component {
       .catch(function (error) {
         console.log(error);
       });
-    console.log(event);
   }
   handleAllTime = (event) => {
     //To get the top 100 campers of all time: 
@@ -67,17 +66,9 @@ class App extends Component {
       isHover: !this.state.isHover
     });
   }
-  //vue
   render() {
     const { prom, reqAlluser, req30Days, isLoading } = this.state;
-    let loopAllData = prom.map( (element,i) => {
-      return <LoopAllData 
-        key={i}
-        index={i}
-        element={element}
-      />
-    });
-    
+    let loopAllData = prom.map( (element,i) => <LoopAllData key={i} index={i} element={element} />)
     if (isLoading) {
       return <p>Loading ...</p>;
     }
@@ -87,13 +78,13 @@ class App extends Component {
     return (
       <div className="container">
         <div className="row">
-          <h3>the cream of the cream</h3>
+          <h3> the cream of the cream 🔍</h3>
         </div>
         <table className="table table-responsive">
           <thead>
             <tr>
               <th className='text-center'>Rank</th>
-              <th className='text-left pl-9'>Camper Name</th>
+              <th className='text-left pl-9'>Camper Name 🎖</th>
               <th 
                 className='text-center' >
                 <a 
@@ -101,7 +92,7 @@ class App extends Component {
                   onMouseEnter={this.eventHover} 
                   onMouseLeave={this.eventHover}
                   className={ `${req30} th-30 ${thBtn}` }>
-                  Points in past 30 days
+                  Points in past 30 days 
                 </a>
               </th>
               <th className='text-center'>
