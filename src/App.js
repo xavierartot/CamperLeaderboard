@@ -61,13 +61,13 @@ export default class App extends Component {
         console.log(error);
       });
   }
-  eventHover = (e) => {
+  eventHover = (event) => {
     this.setState({
       isHover: !this.state.isHover
     });
   }
   render() {
-    const { reqAlluser, req30Days, isLoading, isHover } = this.state;
+    const { prom, reqAlluser, req30Days, isLoading, isHover } = this.state;
     if (isLoading) {
       return <p>Loading ...</p>;
     }
@@ -78,15 +78,55 @@ export default class App extends Component {
         </div>
         <table className="table table-responsive">
           <thead>
-             <InitHeaderTable reqAlluser={reqAlluser} req30Days={req30Days} isLoading={isLoading} isHover={isHover} />
+            <InitHeaderTable 
+              reqAlluser={reqAlluser} 
+              handle30={this.handlePast30Days}
+              handleReqAlluser={this.handleAllTime }
+              req30Days={req30Days} 
+              isLoading={isLoading} 
+              isHover={isHover} 
+              eventHov={this.eventHover}
+            />
           </thead>
           <tbody>
-            <InitLoopAllData initData={this.state.prom}/>
+            <InitLoopAllData initData={prom}/>
           </tbody>
         </table>
       </div>
     );
   }
+}
+const InitHeaderTable = ({
+  eventHov, handle30, handleReqAlluser, reqAlluser, req30Days, isLoading, isHover 
+}) => {
+  const isReqAll = req30Days  ? 'border p-2 border-info'    : ''
+  const isReq30  = reqAlluser ? 'border p-2 border-warning' : ''
+  const isThBtn  = isHover    ? 'border-danger'             : ''
+  return <tr>
+    <th className='text-center'>Rank</th>
+    <th className='text-left pl-9'>
+      Camper Name 
+      <span role='img' aria-label='loop'>🎖</span>
+    </th>
+    <th 
+      className='text-center' >
+      <a 
+        onClick      = {  handle30 }
+        onMouseEnter = {  this.eventHover       }
+        onMouseLeave = {  this.eventHover       }
+        className    = {  `${isReq30 } th-30 ${isThBtn }` } >
+				30 best
+      </a>
+    </th>
+    <th className='text-center'>
+      <a 
+        onClick   = {handleReqAlluser}
+        className = { `${isReqAll} th-all-time` }>
+        All time points
+      </a>
+    </th>
+  </tr>
+
 }
 const InitLoopAllData = ({initData}) =>  {
   return ( 
@@ -105,34 +145,4 @@ const InitLoopAllData = ({initData}) =>  {
     })
   )
 }
-const InitHeaderTable = ({ reqAlluser, req30Days, isLoading, isHover }) => {
 
-  const isReqAll = req30Days  ? 'border p-2 border-info'    : ''
-  const isReq30  = reqAlluser ? 'border p-2 border-warning' : ''
-  const isThBtn  = isHover    ? 'border-danger'             : ''
-  return <tr>
-    <th className='text-center'>Rank</th>
-    <th className='text-left pl-9'>
-      Camper Name 
-      <span role='img' aria-label='loop'>🎖</span>
-    </th>
-    <th 
-      className='text-center' >
-      <a 
-        onClick      = {this.handlePast30Days}
-        onMouseEnter = {this.eventHover}
-        onMouseLeave = {this.eventHover}
-        className    = { `${isReq30} th-30 ${isThBtn}` }>
-        Points in past 30 days 
-      </a>
-    </th>
-    <th className='text-center'>
-      <a 
-        onClick   = {this.handleAllTime}
-        className = { `${isReqAll} th-all-time` }>
-        All time points
-      </a>
-    </th>
-  </tr>
-
-}
