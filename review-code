@@ -1,0 +1,39 @@
+from Discord
+
+In my opinion there is too much stuff happening in this component. Maybe you can try to split it up more. 
+
+- Why did you make the const LoopAllData = ... not part of a component?
+Make sens now you bring it.
+
+- Consider consistent naming, e. g. reqAlluser -> isReqAlluser 
+the consistent about which parameter, do you mean a convention with is... for the if...else?
+
+- When you're using the constructor, you should call constructor(props) and super(props) : 
+https://reactjs.org/docs/react-component.html#constructor
+😇
+-  .catch(function (error) {  ->you could use an arrow function here
+Can you explain why and the benefits?
+
+- Also in the catch, you could handle an error more appropriately, instead of just logging it. 
+It's my first experience with catch, what do you mean exactly?
+- You could furthermore extend the isLoading: ...  by using AsyncStates. For example, the initial state is something like this: 
+const ASYNC_STATE_IDLE = 'ASYNC_STATE_IDLE';
+const ASYNC_STATE_PENDING = 'ASYNC_STATE_PENDING';
+const ASYNC_STATE_ERROR = 'ASYNC_STATE_ERROR';
+const ASYNC_STATE_SUCCESS = 'ASYNC_STATE_SUCCESS';
+
+this.state = {
+  asyncState: ASYNC_STATE_IDLE,
+  ...
+}
+
+And then depending if you have completed the requests successfully or errors, you set the state correspondingly. 
+
+Then you can also react in the render function like
+ 
+if (this.state.asyncState === ASYNC_STATE_PENDING) {
+  // show loader ...
+}
+I never heard about AsyncStates, I'm lost, thus I google it and find this library. I really doesn't know if it's relevant?
+https://www.npmjs.com/package/react-async-state  
+

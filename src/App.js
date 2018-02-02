@@ -3,9 +3,9 @@ import './App.css';
 import Axios from 'axios';
 import 'react-fontawesome';
 
-class App extends Component {
-  constructor() {
-    super();
+export default class App extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       isLoading  : false,
       reqAlluser : true,
@@ -68,42 +68,17 @@ class App extends Component {
   }
   render() {
     const { reqAlluser, req30Days, isLoading } = this.state;
-    //let initLoopAllData = 
-      //prom.map( (element,i) => )
     if (isLoading) {
       return <p>Loading ...</p>;
     }
-    const reqAll = req30Days ? 'border p-2 border-info': ''
-    const req30  = reqAlluser ? 'border p-2 border-warning': ''
-    const thBtn  = this.state.isHover ? 'border-danger': ''
     return (
       <div className="container">
         <div className="row">
-          <h3> the cream of the cream 🔍</h3>
+          <h3> the cream of the cream <span role='img' aria-label='loop'>🔍</span></h3>
         </div>
         <table className="table table-responsive">
           <thead>
-            <tr>
-              <th className='text-center'>Rank</th>
-              <th className='text-left pl-9'>Camper Name 🎖</th>
-              <th 
-                className='text-center' >
-                <a 
-                  onClick={this.handlePast30Days} 
-                  onMouseEnter={this.eventHover} 
-                  onMouseLeave={this.eventHover}
-                  className={ `${req30} th-30 ${thBtn}` }>
-                  Points in past 30 days 
-                </a>
-              </th>
-              <th className='text-center'>
-                <a 
-                  onClick={this.handleAllTime} 
-                  className={ `${reqAll} th-all-time` }>
-                  All time points
-                </a>
-              </th>
-            </tr>
+             <InitHeaderTable reqAlluser={reqAlluser} req30Days={req30Days} isLoading={isLoading} />
           </thead>
           <tbody>
             <InitLoopAllData initData={this.state.prom}/>
@@ -116,7 +91,7 @@ class App extends Component {
 const InitLoopAllData = ({initData}) =>  {
   return ( 
     initData.map( (element, index) => {
-      return <tr className="text-center">
+      return <tr className="text-center" key={index}>
       <td className="text-center font-weight-bold">{index+1}</td>
       <td className='text-left pl-5 no-img'>
         <span className="mr-3">
@@ -130,4 +105,34 @@ const InitLoopAllData = ({initData}) =>  {
     })
   )
 }
-export default App;
+const InitHeaderTable = ({ reqAlluser, req30Days, isLoading }) => {
+
+  const isReqAll = req30Days          ? 'border p-2 border-info'    : ''
+  const isReq30  = reqAlluser         ? 'border p-2 border-warning' : ''
+  const isThBtn  = this.state.isHover ? 'border-danger'             : ''
+  return <tr>
+    <th className='text-center'>Rank</th>
+    <th className='text-left pl-9'>
+      Camper Name 
+      <span role='img' aria-label='loop'>🎖</span>
+    </th>
+    <th 
+      className='text-center' >
+      <a 
+        onClick      = {this.handlePast30Days}
+        onMouseEnter = {this.eventHover}
+        onMouseLeave = {this.eventHover}
+        className    = { `${isReq30} th-30 ${isThBtn}` }>
+        Points in past 30 days 
+      </a>
+    </th>
+    <th className='text-center'>
+      <a 
+        onClick   = {this.handleAllTime}
+        className = { `${isReqAll} th-all-time` }>
+        All time points
+      </a>
+    </th>
+  </tr>
+
+}
