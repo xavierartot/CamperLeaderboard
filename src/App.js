@@ -72,13 +72,16 @@ class App extends Component {
     if (isLoading) {
       return <p>Loading ...</p>;
     }
-    const reqAll = req30Days ? 'border p-2 border-info': ''
-    const req30  = reqAlluser ? 'border p-2 border-warning': ''
-    const thBtn = this.state.isHover ? 'border-danger': ''
+    const isReqAll = req30Days ? 'border p-2 border-info': ''
+    const isReq30  = reqAlluser ? 'border p-2 border-warning': ''
+    const isThBtn = this.state.isHover ? 'border-danger': ''
     return (
       <div className="container">
         <div className="row">
-          <h3> the cream of the cream 🔍</h3>
+          <h3> 
+            the cream of the cream 
+            <span role="img" aria-label='loop'>🔍</span>
+          </h3>
         </div>
         <table className="table table-responsive">
           <thead>
@@ -91,14 +94,14 @@ class App extends Component {
                   onClick={this.handlePast30Days} 
                   onMouseEnter={this.eventHover} 
                   onMouseLeave={this.eventHover}
-                  className={ `${req30} th-30 ${thBtn}` }>
+                  className={ `${isReq30} th-30 ${isThBtn}` }>
                   Points in past 30 days 
                 </a>
               </th>
               <th className='text-center'>
                 <a 
                   onClick={this.handleAllTime} 
-                  className={ `${reqAll} th-all-time` }>
+                  className={ `${isReqAll} th-all-time` }>
                   All time points
                 </a>
               </th>
