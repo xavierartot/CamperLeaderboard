@@ -67,7 +67,7 @@ export default class App extends Component {
     });
   }
   render() {
-    const { reqAlluser, req30Days, isLoading } = this.state;
+    const { reqAlluser, req30Days, isLoading, isHover } = this.state;
     if (isLoading) {
       return <p>Loading ...</p>;
     }
@@ -78,7 +78,7 @@ export default class App extends Component {
         </div>
         <table className="table table-responsive">
           <thead>
-             <InitHeaderTable reqAlluser={reqAlluser} req30Days={req30Days} isLoading={isLoading} />
+             <InitHeaderTable reqAlluser={reqAlluser} req30Days={req30Days} isLoading={isLoading} isHover={isHover} />
           </thead>
           <tbody>
             <InitLoopAllData initData={this.state.prom}/>
@@ -105,11 +105,11 @@ const InitLoopAllData = ({initData}) =>  {
     })
   )
 }
-const InitHeaderTable = ({ reqAlluser, req30Days, isLoading }) => {
+const InitHeaderTable = ({ reqAlluser, req30Days, isLoading, isHover }) => {
 
-  const isReqAll = req30Days          ? 'border p-2 border-info'    : ''
-  const isReq30  = reqAlluser         ? 'border p-2 border-warning' : ''
-  const isThBtn  = this.state.isHover ? 'border-danger'             : ''
+  const isReqAll = req30Days  ? 'border p-2 border-info'    : ''
+  const isReq30  = reqAlluser ? 'border p-2 border-warning' : ''
+  const isThBtn  = isHover    ? 'border-danger'             : ''
   return <tr>
     <th className='text-center'>Rank</th>
     <th className='text-left pl-9'>
