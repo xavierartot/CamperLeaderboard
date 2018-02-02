@@ -74,7 +74,7 @@ class App extends Component {
     }
     const reqAll = req30Days ? 'border p-2 border-info': ''
     const req30  = reqAlluser ? 'border p-2 border-warning': ''
-    const thBtn = this.state.isHover ? 'border-danger': ''
+    const thBtn  = this.state.isHover ? 'border-danger': ''
     return (
       <div className="container">
         <div className="row">
