@@ -62,6 +62,7 @@ export default class App extends Component {
       });
   }
   eventHover = (event) => {
+    console.log(event);
     this.setState({
       isHover: !this.state.isHover
     });
@@ -97,7 +98,7 @@ export default class App extends Component {
   }
 }
 const InitHeaderTable = ({
-  eventHov, handle30, handleReqAlluser, reqAlluser, req30Days, isLoading, isHover 
+  eventhov, handle30, handleReqAlluser, reqAlluser, req30Days, isLoading, isHover 
 }) => {
   const isReqAll = req30Days  ? 'border p-2 border-info'    : ''
   const isReq30  = reqAlluser ? 'border p-2 border-warning' : ''
@@ -112,8 +113,8 @@ const InitHeaderTable = ({
       className='text-center' >
       <a 
         onClick      = {  handle30 }
-        onMouseEnter = {  this.eventHover       }
-        onMouseLeave = {  this.eventHover       }
+        onMouseEnter = {  eventhov       }
+        onMouseLeave = {  eventhov       }
         className    = {  `${isReq30 } th-30 ${isThBtn }` } >
 				30 best
       </a>
@@ -121,6 +122,8 @@ const InitHeaderTable = ({
     <th className='text-center'>
       <a 
         onClick   = {handleReqAlluser}
+        onMouseEnter = {  eventhov       }
+        onMouseLeave = {  eventhov       }
         className = { `${isReqAll} th-all-time` }>
         All time points
       </a>
