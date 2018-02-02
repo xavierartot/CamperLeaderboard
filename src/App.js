@@ -72,8 +72,8 @@ class App extends Component {
     if (isLoading) {
       return <p>Loading ...</p>;
     }
-    let reqAll = req30Days ? 'border p-2 border-info': ''
-    let req30  = reqAlluser ? 'border p-2 border-warning': ''
+    const reqAll = req30Days ? 'border p-2 border-info': ''
+    const req30  = reqAlluser ? 'border p-2 border-warning': ''
     const thBtn = this.state.isHover ? 'border-danger': ''
     return (
       <div className="container">
