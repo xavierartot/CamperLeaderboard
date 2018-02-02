@@ -67,8 +67,9 @@ class App extends Component {
     });
   }
   render() {
-    const { prom, reqAlluser, req30Days, isLoading } = this.state;
-    let loopAllData = prom.map( (element,i) => <LoopAllData key={i} index={i} element={element} />)
+    const { reqAlluser, req30Days, isLoading } = this.state;
+    //let initLoopAllData = 
+      //prom.map( (element,i) => )
     if (isLoading) {
       return <p>Loading ...</p>;
     }
@@ -105,16 +106,17 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>
-            {loopAllData }
+            <InitLoopAllData initData={this.state.prom}/>
           </tbody>
         </table>
       </div>
     );
   }
 }
-const LoopAllData = ({element, index }) =>  {
+const InitLoopAllData = ({initData}) =>  {
   return ( 
-    <tr className="text-center">
+    initData.map( (element, index) => {
+      return <tr className="text-center">
       <td className="text-center font-weight-bold">{index+1}</td>
       <td className='text-left pl-5 no-img'>
         <span className="mr-3">
@@ -125,6 +127,7 @@ const LoopAllData = ({element, index }) =>  {
       <td className='text-center'>{element.recent}</td>
       <td className='text-center'>{element.alltime}</td>
     </tr>
+    })
   )
 }
 export default App;
