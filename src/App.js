@@ -68,7 +68,7 @@ export default class App extends Component {
     });
   }
   render() {
-    const { prom, reqAlluser, req30Days, isLoading, isHover } = this.state;
+    const { prom, reqAlluser, req30Days, isLoading } = this.state;
     if (isLoading) {
       return <p>Loading ...</p>;
     }
@@ -80,13 +80,11 @@ export default class App extends Component {
         <table className="table table-responsive">
           <thead>
             <InitHeaderTable 
-              reqAlluser={reqAlluser} 
-              handle30={this.handlePast30Days}
-              handleReqAlluser={this.handleAllTime }
-              req30Days={req30Days} 
-              isLoading={isLoading} 
-              isHover={isHover} 
-              eventHov={this.eventHover}
+              handle30         = {this.handlePast30Days}
+              handleReqAlluser = {this.handleAllTime }
+              isHoverProp      = {this.eventHover}
+              reqAlluser       = {reqAlluser}
+              req30Days        = {req30Days}
             />
           </thead>
           <tbody>
@@ -98,33 +96,33 @@ export default class App extends Component {
   }
 }
 const InitHeaderTable = ({
-  eventhov, handle30, handleReqAlluser, reqAlluser, req30Days, isLoading, isHover 
+  handle30, handleReqAlluser,isHoverProp, reqAlluser,req30Days
 }) => {
-  const isReqAll = req30Days  ? 'border p-2 border-info'    : ''
-  const isReq30  = reqAlluser ? 'border p-2 border-warning' : ''
-  const isThBtn  = isHover    ? 'border-danger'             : ''
+  const isReqAll = req30Days   ? 'border p-2 border-info'    : ''
+  const isReq30  = reqAlluser  ? 'border p-2 border-warning' : ''
+  const isThBtn  = isHoverProp ? 'border-danger'             : ''
   return <tr>
     <th className='text-center'>Rank</th>
     <th className='text-left pl-9'>
       Camper Name 
-      <span role='img' aria-label='loop'>🎖</span>
+      <span role='img' aria-label='classment'>🎖</span>
     </th>
     <th 
       className='text-center' >
       <a 
-        onClick      = {  handle30 }
-        onMouseEnter = {  eventhov       }
-        onMouseLeave = {  eventhov       }
-        className    = {  `${isReq30 } th-30 ${isThBtn }` } >
+        onClick      = {  handle30   }
+        onMouseEnter = {  isThBtn    }
+        onMouseLeave = {  isThBtn    }
+        className    = {  `${isReq30 } th-30 ${isThBtn } ` } >
 				30 best
       </a>
     </th>
     <th className='text-center'>
       <a 
-        onClick   = {handleReqAlluser}
-        onMouseEnter = {  eventhov       }
-        onMouseLeave = {  eventhov       }
-        className = { `${isReqAll} th-all-time` }>
+        onClick         = {handleReqAlluser}
+        onMouseEnter    = {   isThBtn      }
+        onMouseLeave    = {   isThBtn      }
+        className       = { `${isReqAll} th-all-time` }>
         All time points
       </a>
     </th>
@@ -148,4 +146,3 @@ const InitLoopAllData = ({initData}) =>  {
     })
   )
 }
-
