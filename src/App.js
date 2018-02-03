@@ -106,7 +106,8 @@ const InitHeaderTable = ({
 }) => {
   const isReqAll = req30Days   ? 'border p-2 border-info'    : ''
   const isReq30  = reqAlluser  ? 'border p-2 border-warning' : ''
-  const isOnCss = isOn ? 'border p-2 border-danger' : '';
+  const isOnCss30 = isOn ? 'border p-2 border-danger' : '';
+  const isOnCssAll = isOn ? 'border p-2 border-info' : '';
   return <tr>
     <th className='text-center'>Rank</th>
     <th className='text-left pl-9'>
@@ -119,7 +120,7 @@ const InitHeaderTable = ({
         onClick      = {handle30}
         onMouseEnter = {on }
         onMouseLeave = {off}
-        className    = {`${isReq30} th-30 ${isOnCss}`} >
+        className    = {`${isReq30} th-30 ${isOnCss30}`} >
 				30 best
       </a>
     </th>
@@ -128,7 +129,7 @@ const InitHeaderTable = ({
         onClick    = {handleReqAlluser}
         onMouseEnter = {on }
         onMouseLeave = {off}
-        className  = {`${isReqAll} th-all-time ${isOnCss}` }>
+        className  = {`${isReqAll} th-all-time ${isOnCssAll}` }>
         All time points
       </a>
     </th>
