@@ -111,8 +111,6 @@ const InitHeaderTable = ({
       className='text-center' >
       <a 
         onClick      = {  handle30   }
-        onMouseEnter = {  isThBtn    }
-        onMouseLeave = {  isThBtn    }
         className    = {  `${isReq30 } th-30 ${isThBtn } ` } >
 				30 best
       </a>
@@ -120,8 +118,6 @@ const InitHeaderTable = ({
     <th className='text-center'>
       <a 
         onClick         = {handleReqAlluser}
-        onMouseEnter    = {   isThBtn      }
-        onMouseLeave    = {   isThBtn      }
         className       = { `${isReqAll} th-all-time` }>
         All time points
       </a>
