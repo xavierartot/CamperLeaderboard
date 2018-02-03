@@ -10,7 +10,7 @@ export default class App extends Component {
       isLoading  : false,
       reqAlluser : true,
       req30Days  : false,
-      isHover    : '',
+      isHover    : false,
       prom       : []
     }
   }
@@ -61,12 +61,15 @@ export default class App extends Component {
         console.log(error);
       });
   }
-  eventHover = (event) => {
-    console.log(event);
+  setHover = () => {
     this.setState({
-      isHover: !this.state.isHover
+      isHover: true
     });
-    return this.state.isHover ? 'border-info!important': ''     
+  }
+  removeHover = () => {
+   this.setState({
+     isHover : false
+   });
   }
   render() {
     const { prom, reqAlluser, req30Days, isLoading } = this.state;
@@ -83,7 +86,9 @@ export default class App extends Component {
             <InitHeaderTable 
               handle30         = {this.handlePast30Days}
               handleReqAlluser = {this.handleAllTime }
-              isHoverProp      = {this.eventHover}
+              on      = {this.setHover }
+              off      = {this.removeHover }
+              isOn = { this.state.isHover}
               reqAlluser       = {reqAlluser}
               req30Days        = {req30Days}
             />
@@ -97,14 +102,11 @@ export default class App extends Component {
   }
 }
 const InitHeaderTable = ({
-  handle30, handleReqAlluser,isHoverProp, reqAlluser,req30Days
+  handle30, handleReqAlluser,on, off, isOn, reqAlluser,req30Days
 }) => {
-  console.log(isHoverProp );
   const isReqAll = req30Days   ? 'border p-2 border-info'    : ''
   const isReq30  = reqAlluser  ? 'border p-2 border-warning' : ''
-  const isThBtn  = isHoverProp ? 'border-danger'             : ''
-  //let xav = () => {
-  //}
+  const isOnCss = isOn ? 'border p-2 border-danger' : '';
   return <tr>
     <th className='text-center'>Rank</th>
     <th className='text-left pl-9'>
@@ -114,16 +116,19 @@ const InitHeaderTable = ({
     <th 
       className='text-center' >
       <a 
-        onClick      = {  handle30   }
-        onMouseEnter    = {   isHoverProp }
-        className    = {  `${isReq30 } th-30 ${isThBtn } ` } >
+        onClick      = {handle30}
+        onMouseEnter = {on }
+        onMouseLeave = {off}
+        className    = {`${isReq30} th-30 ${isOnCss}`} >
 				30 best
       </a>
     </th>
     <th className='text-center'>
       <a 
-        onClick         = {handleReqAlluser}
-        className       = { `${isReqAll} th-all-time` }>
+        onClick    = {handleReqAlluser}
+        onMouseEnter = {on }
+        onMouseLeave = {off}
+        className  = {`${isReqAll} th-all-time ${isOnCss}` }>
         All time points
       </a>
     </th>
